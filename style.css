@@ -1,0 +1,967 @@
+/* Importazione Font e reset */
+body {
+    font-family: 'PP Mori', 'Helvetica Now Text', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: black;
+    background-color: white;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+}
+
+
+
+/* ======================================= */
+/* --- CURSORE PERSONALIZZATO: PALLINO 15PX CON BLEND MODE --- */
+/* ======================================= */
+
+/* Nasconde il cursore di sistema su tutto il corpo della pagina */
+body {
+    cursor: none;
+}
+
+a:hover,
+.project-item:hover,
+.credits-toggle-title:hover {
+    cursor: none !important;
+}
+
+/* Crea il cursore personalizzato */
+.custom-cursor {
+    width: 15px;
+    height: 15px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    pointer-events: none;
+    
+    mix-blend-mode: difference; /* MANTENUTO: Essenziale per il cursore */
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    
+    transform: translate(-50%, -50%);
+
+    /* AGGIUNTA FONDAMENTALE: Transizione per l'animazione di bump */
+    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.50, 2.0); /* Animazione con bump (overshoot) */
+}
+
+/* NUOVA CLASSE: Ingrandisce il cursore di circa 2,5x */
+.cursor-grow {
+    transform: translate(-50%, -50%) scale(2.5); /* Ingrandisce a 2.5 volte */
+}
+
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Tipografia Base: 16px, 18px interlinea, -2% spaziatura, Bold */
+/* AGGIORNATO: Tipografia standardizzata */
+.intro-text h1,
+.footer-grid div {
+    font-size: 16px; /* AGGIORNATO */
+    line-height: 18px; /* AGGIORNATO */
+    letter-spacing: -0.02em;
+    font-weight: bold;
+    text-decoration: none;
+    color: rgb(0, 0, 0); /* COLORE BASE */
+    mix-blend-mode: difference; /* MANTENUTO SUL TESTO */
+    color: white !important; /* MANTENUTO PER L'INVERSIONE */
+}
+
+/* --- GRIGLIA 24 COLONNE --- */
+.container {
+    /* Margine di 15px dai bordi della pagina */
+    margin: 0 15px;
+    /* Configurazione Griglia 24 colonne */
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    gap: 15px; /* Gap tra le colonne */
+}
+
+/* --- HEADER / MENU FISSO (TRASPARENTE con DIFFERENCE) --- */
+#header-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: transparent;
+    padding: 15px 0;
+    /* MANTENUTO SUL CONTENITORE TESTUALE */
+    mix-blend-mode: difference;
+}
+
+/* Link del Menu */
+/* AGGIORNATO: Tipografia standardizzata */
+.logo-link,
+#desktop-nav a,
+#mobile-nav a,
+.menu-toggle {
+    font-size: 16px; /* AGGIORNATO */
+    line-height: 18px; /* AGGIORNATO */
+    letter-spacing: -0.02em;
+    font-weight: bold;
+    text-decoration: none;
+    color: rgb(0, 0, 0); /* COLORE BASE */
+    /* Regole per l'effetto hover */
+    opacity: 1;
+    transition: opacity 0s ease;
+    mix-blend-mode: difference; /* MANTENUTO SUL TESTO */
+    color: white !important; /* MANTENUTO PER L'INVERSIONE */
+}
+
+/* Effetto hover sul desktop */
+#desktop-nav:hover a {
+    opacity: 0;
+}
+#desktop-nav a:hover {
+    opacity: 1;
+}
+
+/* Disposizione Menu Desktop: equidistante e su tutta la larghezza */
+#desktop-nav {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Nascondi gli elementi mobile sul desktop */
+#mobile-header-bar,
+#mobile-nav,
+.menu-toggle {
+    display: none;
+}
+
+/* --- CONTENUTO PRINCIPALE --- */
+main {
+    flex: 1;
+    padding-top: 60px; /* Padding Top Desktop */
+}
+
+.intro-text {
+    /* Desktop: largo 12 colonne */
+    grid-column: 1 / span 12;
+    padding-top: 40px;
+    margin-bottom: 40px;
+}
+
+/* --- FOOTER --- */
+footer {
+    padding: 15px 0;
+    border-top: 1px solid black; /* MANTENUTO NERO (non deve invertire) */
+    margin-top: 120px;
+    /* RIMOSSO: mix-blend-mode: difference; (Per mantenere visibile la linea) */
+}
+
+.container footer {
+    background-color: white;
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    grid-column: 1 / -1;
+    margin-bottom: 5px;
+}
+
+/* --- ANIMAZIONE LOGO FOOTER --- */
+@keyframes scroll-left {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.footer-name {
+    grid-column: 1 / -1;
+    line-height: 1;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: normal;
+}
+
+.scroll-wrap {
+    display: flex;
+    width: 200%;
+    animation: scroll-left 8s linear infinite;
+}
+
+.footer-name img {
+    width: 50%;
+    height: auto;
+    display: block;
+    /* RIMOSSO: mix-blend-mode: difference; (Per mantenere visibile il logo) */
+}
+
+/* ======================================= */
+/* --- MEDIA QUERIES: Layout Mobile --- */
+/* ======================================= */
+
+@media screen and (max-width: 768px) {
+    /* --- HEADER / NAVIGATION MOBILE --- */
+    
+    /* 1. Nascondi menu desktop */
+    #desktop-nav {
+        display: none;
+    }
+    
+    /* 2. Mostra e configura la barra fissa (Logo sx, Toggle dx) */
+    #mobile-header-bar {
+        display: flex;
+        grid-column: 1 / -1;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        z-index: 1001;
+    }
+
+    /* Rendiamo visibile il Toggle "Menu" */
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+    }
+    
+    /* 3. Posizionamento del menu a bandiera (Aperto/Chiuso) */
+    #mobile-nav {
+        /* Inizialmente nascosto */
+        display: none;
+        
+        flex-direction: column;
+        align-items: flex-end;
+        
+        /* Fissaggio e allineamento a destra (bandiera) */
+        position: fixed;
+        top: 40px; /* Sotto l'header */
+        right: 15px;
+        z-index: 999;
+        
+        padding: 0;
+    }
+    
+    /* Classe JS per mostrare il menu */
+    #mobile-nav.mobile-nav-visible {
+        display: flex;
+    }
+    
+    #mobile-nav a {
+        padding: 0;
+        margin: 0;
+        text-align: right;
+    }
+
+    /* 4. CONTENUTO PRINCIPALE e MARGIN TOP MAGGIORE */
+    main {
+        padding-top: 100px; /* Aumentato come richiesto */
+    }
+    
+    /* Testo Introduttivo a tutta larghezza su mobile */
+    .intro-text {
+        grid-column: 1 / -1;
+        padding-top: 30px;
+    }
+
+    /* 5. Footer Info (Incolonnato su Mobile) */
+    .footer-grid {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0px;
+    }
+    
+    .footer-grid div {
+        width: 100%;
+        text-align: left;
+    }
+
+    /* 6. Disabilita l'Image Trail su Mobile */
+    #image-trail-container {
+       display: none !important;
+    }
+}
+
+
+/* --- NUOVI STILI PER IMAGE TRAIL (DESKTOP) --- */
+#image-trail-container {
+    /* Occupa tutta la larghezza e altezza visibile per l'effetto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* Z-Index: DEVE essere inferiore a quello dell'header (#header-menu è 1000) */
+    z-index: 900;
+    pointer-events: none;
+}
+
+/* Stile per le immagini che appaiono e spariscono */
+.trail-image {
+    position: absolute;
+    width: 200px;
+    height: auto; /* Mantiene le proporzioni originali */
+    object-fit: contain;
+    pointer-events: none;
+    opacity: 0;
+    
+    /* Funzione di easing personalizzata per il bounce */
+    transition: opacity 0.2s cubic-bezier(0.50, -0.40, 0.20, 1.25),
+                transform 0.2s cubic-bezier(0.50, -0.40, 0.20, 1.25);
+    
+    transform: scale(0.7); /* Inizialmente leggermente rimpicciolito */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ======================================= */
+/* --- STILI PAGINA ABOUT ME --- */
+/* ======================================= */
+
+/* Stile per il titolo fisso "About me" */
+.page-title {
+    /* AGGIORNATO: Lascia spazio per la sidebar (il container è 24 colonne) */
+    grid-column: 1 / span 10; /* Occupando 10 colonne, lascia spazio per la sidebar di 4 colonne + gap */
+    
+    position: relative;
+    
+    /* Tipografia standardizzata */
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    font-weight: bold;
+    color: rgb(0, 0, 0); /* COLORE BASE */
+    
+    padding-top: 40px;
+    margin-bottom: 40px;
+    
+    mix-blend-mode: difference; /* MANTENUTO SUL TESTO */
+    color: white !important; /* MANTENUTO PER L'INVERSIONE */
+}
+
+.page-title h1 {
+    margin: 0;
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+}
+
+
+/* --- STILI PAGINA ABOUT ME: IMMAGINE SIDEBAR FISSA (DESKTOP) --- */
+.about-sidebar-image {
+    /* POSIZIONAMENTO FISSO (Desktop) */
+    position: fixed;
+    
+    /* Larghezza: 4 colonne. Calcolo rispetto al .container e ai suoi gap. */
+    width: calc(4 * (100% / 24) + 3 * 15px); /* 4 colonne + 3 gap */
+    
+    /* Allineamento a destra (15px dal bordo destro della viewport) */
+    right: 15px;
+    /* Allineamento verticale con il titolo "About me" (sotto l'header che è alto 60px) */
+    top: calc(60px + 40px); /* Header height + page-title padding-top */
+    
+    height: auto; /* Mantiene le proporzioni originali dell'immagine */
+    object-fit: contain; /* Assicura che l'immagine sia contenuta senza tagli */
+    z-index: 990; /* Per essere sicuro che sia sopra il contenuto, ma sotto il cursore */
+    
+    /* Nota: non ha bisogno di overflow-y: hidden, perché è un'immagine */
+}
+
+
+/* Contenitore generale per le sezioni CV (Education, Experiences, etc.) */
+.cv-section {
+    /* Deve occupare solo lo spazio che non è occupato dalla sidebar (fino alla colonna 12) */
+    grid-column: 1 / 13; /* Da colonna 1 a 12 (12 colonne totali) */
+    display: grid;
+    grid-template-columns: subgrid;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+/* Colonna 1: Titolo (e.g., Education) */
+.cv-title-col {
+    /* Desktop: 3 colonne (Colonna 1 a 3 all'interno del grid 1-12) */
+    grid-column: 1 / span 3;
+    
+    /* Tipografia standardizzata */
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    font-weight: bold;
+    color: rgb(0, 0, 0); /* COLORE BASE */
+    
+    mix-blend-mode: difference; /* MANTENUTO SUL TESTO */
+    color: white !important; /* MANTENUTO PER L'INVERSIONE */
+}
+
+.cv-title-col h2 {
+    margin: 0;
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+}
+
+/* Colonna 2: Contenuto (e.g., lista esperienze) */
+.cv-content-col {
+    /* Desktop: 9 colonne (Colonna 4 a 12 all'interno del grid 1-12) */
+    grid-column: 4 / span 9;
+    
+    /* Tipografia standardizzata */
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    font-weight: bold;
+    color: rgb(0, 0, 0); /* COLORE BASE */
+    
+    mix-blend-mode: difference; /* MANTENUTO SUL TESTO */
+    color: white !important; /* MANTENUTO PER L'INVERSIONE */
+}
+
+.cv-content-col p {
+    margin: 0 0 20px 0;
+    font-weight: inherit;
+    line-height: inherit;
+}
+
+.cv-content-col p:last-child {
+    margin-bottom: 0;
+}
+
+/* Formattazione specifica per la lista Interests */
+.cv-content-col.interests-list p {
+    margin-bottom: 0;
+}
+
+/* ======================================= */
+/* --- AGGIUNTE MEDIA QUERIES MOBILE (max-width: 768px) --- */
+/* ======================================= */
+
+@media screen and (max-width: 768px) {
+    
+    /* Reset layout a colonna singola per l'immagine ABOUT ME */
+    .about-sidebar-image {
+        position: relative; /* Torna allo scroll normale */
+        grid-column: 1 / -1; /* Occupa tutta la larghezza del container */
+        width: 100%;
+        top: auto;
+        left: auto;
+        right: auto;
+        height: auto;
+        margin: 0;
+        margin-bottom: 40px;
+    }
+    
+    /* Il titolo "About me" torna a tutta larghezza */
+    .page-title {
+        grid-column: 1 / -1;
+    }
+    
+    /* Layout a colonna unica per le sezioni CV su mobile */
+    .cv-section {
+        /* Il container .cv-section torna a tutta larghezza (1 / -1) */
+        grid-column: 1 / -1;
+        margin-bottom: 30px;
+    }
+    
+    /* Il titolo va a tutta larghezza */
+    .cv-title-col {
+        grid-column: 1 / -1;
+        margin-bottom: 10px;
+    }
+
+    /* Il contenuto va a tutta larghezza */
+    .cv-content-col {
+        grid-column: 1 / -1;
+        
+        font-size: 16px;
+        line-height: 18px;
+    }
+    
+    .cv-content-col p {
+        margin: 0 0 15px 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ======================================= */
+/* --- STILI PAGINE PROGETTI (Design/Photo/Film) --- */
+/* ======================================= */
+
+/* ... (main e page-title rimangono invariati) ... */
+
+/* Wrapper che gestisce la griglia 3xN (Desktop) */
+.project-grid-wrapper {
+    /* RIMOZIONE: rimosso column-count e column-gap (Masonry) */
+    
+    /* ABILITA LA GRIGLIA 3 COLONNE DENTRO IL CONTAINER 24-COLONNE */
+    display: grid;
+    /* La griglia si divide in tre colonne uguali */
+    grid-template-columns: repeat(3, 1fr);
+    /* Utilizziamo il gap di 15px definito dal .container */
+    gap: 15px;
+    
+    /* Il wrapper deve estendersi per tutta la larghezza della griglia 24-colonne */
+    grid-column: 1 / -1;
+}
+
+/* Singolo blocco progetto (il link) */
+.project-item {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    /* Non è più necessario break-inside: avoid */
+    margin-bottom: 40px; /* Spazio verticale tra le righe */
+}
+
+/* Area del titolo */
+.project-title-area {
+    display: block;
+    margin-bottom: 5px;
+    padding: 0;
+}
+
+.project-title {
+    /* AGGIORNATO: Tipografia standardizzata */
+    font-size: 16px; /* AGGIORNATO */
+    line-height: 18px; /* AGGIORNATO */
+    letter-spacing: -0.02em;
+    font-weight: bold;
+    display: block;
+    
+    mix-blend-mode: difference; /* MANTENUTO SUL TESTO */
+    color: white !important; /* MANTENUTO PER L'INVERSIONE */
+}
+
+
+/* Immagine di copertina (Ora gestita per il 16:9) */
+.project-cover {
+    display: block;
+    width: 100%;
+    
+    /* CRUCIALE: Contenitore forzato al rapporto 16:9 (altezza = 56.25% della larghezza) */
+    aspect-ratio: 16 / 9;
+    
+    /* Assicura che l'immagine copra lo spazio 16:9 */
+    object-fit: cover;
+    
+    /* RIMOSSO: mix-blend-mode: difference; */
+}
+
+
+/* ======================================= */
+/* --- MEDIA QUERIES: Layout Mobile (Full Width) --- */
+/* ======================================= */
+@media screen and (max-width: 768px) {
+    
+    /* Il wrapper della griglia torna a colonna singola su mobile */
+    .project-grid-wrapper {
+        grid-template-columns: 1fr; /* Una sola colonna */
+        gap: 0;
+    }
+
+    
+    /* Il titolo torna a tutta larghezza */
+    .page-title.about-title {
+        grid-column: 1 / -1;
+        margin-bottom: 40px;
+    }
+
+    /* Singolo progetto - Spazio verticale fisso */
+    .project-item {
+        margin-bottom: 40px;
+    }
+    
+    /* Immagine di copertina (Mobile Full Width) */
+    .project-cover {
+        /* Calcola la larghezza per uscire dai margini di 15px del .container */
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ======================================= */
+/* --- STILI PAGINA SINGOLO PROGETTO (DESKTOP) --- */
+/* ======================================= */
+
+/* Contenitore principale a due colonne (12/12) */
+.project-split-container {
+    /* Occupa tutta la larghezza della griglia 24-colonne */
+    grid-column: 1 / -1;
+    display: flex;
+    /* Altezza minima: tutta la viewport meno l'header */
+    min-height: calc(100vh - 60px);
+}
+
+/* BLOCCO SINISTRO: Dettagli Progetto (Fisso) */
+.project-info-panel {
+    width: 50%; /* 50% della larghezza del .container */
+    
+    position: fixed;
+    top: 80px; /* Sotto l'header */
+    left: 15px; /* Allineato con il margine sinistro del .container */
+    
+    /* Altezza = Viewport - Header (60px) - Margine inferiore (15px) */
+    height: calc(100vh - 80px - 15px);
+    
+    /* Padding destro di 15px (uguale al gap del .container) */
+    padding-right: 15px;
+    
+    overflow-y: hidden;
+    /* RIMOSSO: mix-blend-mode: difference; (Il contenitore è fisso) */
+}
+
+/* Stile per il testo principale del progetto (la descrizione) */
+.project-description {
+    /* AGGIORNATO: Tipografia standardizzata */
+    font-size: 16px; /* AGGIORNATO */
+    line-height: 18px; /* AGGIORNATO */
+    letter-spacing: -0.02em;
+    font-weight: bold;
+    margin-bottom: 40px;
+    padding-right: 15px;
+    text-indent: 60px;
+    
+    /* RIMOSSO: mix-blend-mode: difference; e color: white !important; (Testo fisso) */
+    color: black !important; /* RIPRISTINO DEL NERO */
+}
+
+.project-title-main {
+    /* AGGIORNATO: Tipografia standardizzata */
+    font-size: 16px; /* AGGIORNATO */
+    line-height: 18px; /* AGGIORNATO */
+    letter-spacing: -0.02em;
+    font-weight: bold;
+    margin-bottom: 60px;
+    text-decoration: underline;
+    
+    /* RIMOSSO: mix-blend-mode: difference; e color: white !important; (Testo fisso) */
+    color: black !important; /* RIPRISTINO DEL NERO */
+}
+
+
+/* NUOVI STILI: Sezione Credits Toggle */
+.credits-toggle-container {
+    margin-bottom: 40px;
+}
+
+/* Titolo "Credits" cliccabile (il "flag") */
+.credits-toggle-title {
+    /* AGGIORNATO: Tipografia standardizzata */
+    font-size: 16px; /* AGGIORNATO */
+    line-height: 18px; /* AGGIORNATO */
+    letter-spacing: -0.02em;
+    font-weight: bold;
+    color: black; /* COLORE BASE */
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    
+    /* RIMOSSO: mix-blend-mode: difference; e color: white !important; (Testo fisso) */
+    color: black !important; /* RIPRISTINO DEL NERO */
+}
+
+/* Freccia/simbolo del flag (il triangolino) */
+.credits-toggle-title span {
+    display: inline-block;
+    margin-right: 8px;
+    transition: transform 0s ease;
+}
+
+/* Rotazione della freccia quando il blocco è aperto */
+.credits-toggle-title.active span {
+    transform: rotate(90deg);
+}
+
+/* Contenuto dei Credits (quello che deve apparire/scomparire) */
+.credits-content {
+    /* Nascondi il contenuto per default */
+    display: none;
+    
+    /* AGGIORNATO: Tipografia standardizzata */
+    font-size: 16px; /* AGGIORNATO */
+    line-height: 18px; /* AGGIORNATO */
+    letter-spacing: -0.02em;
+    font-weight: bold;
+    color: black; /* COLORE BASE */
+    padding-top: 0px; /* Spazio sotto il titolo cliccabile */
+    padding-left: 25px;
+    
+    /* RIMOSSO: mix-blend-mode: difference; e color: white !important; (Testo fisso) */
+    color: black !important; /* RIPRISTINO DEL NERO */
+}
+
+/* Quando il blocco è aperto, mostralo */
+.credits-content.show {
+    display: block;
+}
+
+
+/* BLOCCO DESTRO: Galleria Immagini (Scrollabile) */
+.project-gallery-panel {
+    width: 50%; /* 50% della larghezza del .container */
+    
+    /* Sposta il pannello esattamente dopo il 50% di larghezza del pannello sinistro */
+    margin-left: 50%;
+    
+    padding-top: 100px;
+    padding-left: 15px; /* Padding sinistro di 15px per allinearsi con il testo */
+}
+
+/* Stile base per le immagini della galleria */
+.gallery-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Imposta un gap verticale di 15px tra le immagini */
+    margin-bottom: 15px;
+    
+    /* RIMOSSO: mix-blend-mode: difference; */
+}
+
+/* Rimuove il margine inferiore dall'ultima immagine (opzionale ma pulito) */
+.project-gallery-panel .gallery-image:last-child {
+    margin-bottom: 15px; /* Spazio prima del footer */
+}
+
+/* Contenitore base per qualsiasi media (singolo o multiplo) */
+.project-media-row {
+    width: 100%; /* Occupa la larghezza completa della colonna di galleria */
+    display: flex; /* Abilita il layout flessibile */
+    gap: 15px; /* Spazio tra gli elementi (sia desktop che mobile, ma azzerato nel mobile specifico) */
+}
+
+/* Item generico (Contiene l'immagine o il video) */
+.media-item {
+    width: 100%; /* Default: un item occupa il 100% dello spazio disponibile */
+}
+
+/* Regola per l'affiancamento (classe specifica per 2 o più elementi) */
+.project-media-row.media-pair .media-item {
+    width: 50%; /* Se c'è la classe .media-pair, dividi lo spazio equamente in due */
+}
+
+/* Stile per i tag video all'interno del contenitore media */
+.gallery-video {
+    width: 100%; /* Occupano sempre il 100% del loro contenitore (.media-item) */
+    height: auto;
+    display: block;
+    object-fit: cover;
+    /* RIMOSSO: mix-blend-mode: difference; */
+}
+
+/* --- NUOVA CLASSE: BACK TO PROJECTS LINK --- */
+/* ======================================= */
+
+.back-to-projects-link {
+    /* Posizionamento fisso */
+    position: fixed;
+    /* RIMOSSO: bottom: 15px; */
+    left: 15px; /* Margine sinistro di 15px */
+    
+    /* NUOVO: Usiamo top/transform-Y per ancorare l'elemento al fondo. */
+    /* Lo posizioniamo 15px sopra il fondo e usiamo il translateY per fissarlo. */
+    bottom: 15px;
+    
+    z-index: 1000;
+    
+    /* Stili visivi */
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    font-weight: bold;
+    color: black; /* COLORE BASE */
+    text-decoration: none;
+    
+    /* RIMOSSO: mix-blend-mode: difference; e color: white !important; (Testo fisso) */
+    color: black !important; /* RIPRISTINO DEL NERO */
+}
+
+
+/* ======================================= */
+/* --- AGGIUNTE MEDIA QUERIES MOBILE (max-width: 768px) --- */
+/* ======================================= */
+
+@media screen and (max-width: 768px) {
+    /* Reset per l'effetto fisso/split su mobile */
+    .project-split-container {
+        display: block; /* Stack verticale */
+        min-height: auto;
+    }
+    
+    .project-info-panel {
+        position: relative; /* Rendi relativa per lo scroll normale */
+        width: 100%;
+        top: auto;
+        left: auto;
+        height: auto;
+        /* RIPRISTINO: Rimuovi il padding a destra (dal desktop) e aggiungi 15px a sinistra e destra */
+        padding: 0; /* 0 sopra/sotto, 15px a destra/sinistra */
+        overflow-y: visible;
+        grid-column: 1 / -1;
+        margin-top: 100px;
+    }
+    
+    .project-title-main{
+        margin-bottom: 100px;
+    }
+
+    .project-title-main,
+    .project-description,
+    .credits-toggle-container {
+        /* Rimuove i margini/padding aggiuntivi che avevamo nel desktop per il 50% */
+        padding-right: 0;
+    }
+    
+    .project-gallery-panel {
+        width: 100%;
+        margin-left: 0;
+        /* AGGIORNATO: Aggiungi 15px di padding laterale per allineare le immagini al contenuto */
+        padding: 20px 15px 0 0; /* 40px sopra, 15px lati, 0 sotto */
+        grid-column: 1 / -1;
+    }
+
+    /* Le sottosezioni Credits tornano a colonna unica su mobile */
+    .credits-content {
+        padding-top: 10px;
+    }
+    
+    .gallery-image {
+        margin-bottom: 15px;
+        margin-left: 0;
+    }
+
+    /* Gestione Media Row (Affiancati -> Stack verticale) */
+    .project-media-row {
+        flex-direction: column; /* Impila gli item in verticale su mobile */
+        gap: 0; /* Rimuovi il gap del contenitore */
+    }
+    
+    /* CORREZIONE: Imposta sia l'item generico che la coppia affiancata al 100% */
+    .project-media-row .media-item,
+    .project-media-row.media-pair .media-item { /* TARGET AGGIUNTO */
+        width: 100%; /* Ogni item a tutta larghezza */
+    }
+    
+    /* Rimuovi il margine inferiore dall'ultimo item nella riga */
+    .project-media-row .media-item:last-child {
+        margin-bottom: 0;
+    }
+    
+    /* NUOVO: Rimuovi il margin-bottom anche dall'ultimo elemento della coppia */
+    .project-media-row.media-pair .media-item:last-child {
+        margin-bottom: 0;
+    }
+
+    /* Nuovo: Nasconde il link fisso "Back to projects" su mobile */
+    .back-to-projects-link {
+        display: none;
+    }
+}
+
+/* ======================================= */
+/* --- NAVIGAZIONE PROGETTO SUCCESSIVO/PRECEDENTE --- */
+/* ======================================= */
+
+.project-nav {
+    display: flex;
+    justify-content: space-between; /* Distribuisce i link (Prev a sx, Next a dx, Top al centro) */
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+    /* 40px di spazio dal basso dell'ultima immagine, 40px prima del footer */
+    margin-bottom: 40px;
+}
+
+.project-nav a {
+    text-decoration: none;
+    /* AGGIORNATO: Tipografia standardizzata */
+    font-size: 16px; /* AGGIORNATO */
+    line-height: 18px; /* AGGIORNATO */
+    letter-spacing: -0.02em;
+    font-weight: bold;
+    color: black; /* COLORE BASE */
+    /* Rende il link Prev e Next cliccabili su una superficie più ampia */
+    padding: 0px;
+    
+    mix-blend-mode: difference; /* MANTENUTO SUL TESTO (non è fisso) */
+    color: white !important; /* MANTENUTO PER L'INVERSIONE */
+}
+
+/* Stile per i link di navigazione */
+
+
+.nav-top {
+    text-align: center; /* Per sicurezza, anche se è già al centro */
+}
+
+
+/* ======================================= */
+/* --- AGGIUNTE MEDIA QUERIES MOBILE (max-width: 768px) --- */
+/* ======================================= */
+
+@media screen and (max-width: 768px) {
+    /* ... (Mantieni tutti i reset mobile precedenti) ... */
+    
+    /* Navigazione su mobile */
+    .project-nav {
+        margin-top: 120px;
+    }
+}
