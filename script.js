@@ -154,3 +154,36 @@ document.addEventListener('DOMContentLoaded', function() {
         checkFooterOverlap();
     }
 });
+
+
+
+
+
+
+
+/* ======================================= */
+/* --- INCLUSIONE AUTOMATICA FAVICON --- */
+/* ======================================= */
+
+// Questa funzione viene eseguita non appena la pagina è caricata.
+function loadFavicon() {
+    // 1. Crea il nuovo elemento <link>
+    var link = document.createElement('link');
+    
+    // 2. Imposta gli attributi
+    link.rel = 'icon';
+    link.type = 'image/jpg'; // O 'image/x-icon' se usi .ico
+    link.href = 'assets/images/favicon/favicon.jpg'; // Cambia in /favicon.ico o /favicon.svg se necessario
+    
+    // 3. Trova l'elemento <head> del documento
+    var head = document.getElementsByTagName('head')[0];
+    
+    // 4. Aggiungi il tag <link> all'intestazione
+    head.appendChild(link);
+}
+
+// Chiama la funzione quando il documento è pronto
+document.addEventListener('DOMContentLoaded', loadFavicon);
+
+// Se stai usando una struttura per eseguire il codice all'avvio, puoi anche usare:
+// window.onload = loadFavicon;
