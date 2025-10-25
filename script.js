@@ -61,6 +61,20 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     
     const customCursor = document.querySelector('.custom-cursor');
+    const MOBILE_BREAKPOINT = 768; // Definisci la larghezza massima per considerare "mobile"
+
+    // 1. CONTROLLO MOBILE: Se la larghezza della finestra è <= MOBILE_BREAKPOINT, disattiva il cursore.
+    if (window.innerWidth <= MOBILE_BREAKPOINT) {
+        if (customCursor) {
+            // Rimuove il cursore personalizzato dal DOM
+            customCursor.remove();
+        }
+        // Interrompe l'esecuzione della logica del cursore per i dispositivi mobili
+        return; 
+    }
+
+
+    // Esecuzione solo su Desktop (se non è stata eseguita l'istruzione 'return' sopra)
 
     if (customCursor) {
         document.addEventListener('mousemove', (e) => {
