@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     '/assets/images/projects/views/views-02.jpg',
     '/assets/images/projects/views/views-19.jpg',
     '/assets/images/cover/cover-oppureno.jpg',
-    '/assets/images/projects/oppureno/oppureno-07.jpg',
+    '/assets/images/projects/oppureno/oppureno-07.png',
     '/assets/images/cover/cover-letmein.jpg',
     '/assets/images/projects/letmein/letmein-04.jpg',         
     '/assets/images/cover/cover-rewind.jpg',
