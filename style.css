@@ -286,6 +286,13 @@ footer {
         text-align: left;
     }
 
+    .footer-name img {
+    width: 75%;
+    height: auto;
+    display: block;
+    /* RIMOSSO: mix-blend-mode: difference; (Per mantenere visibile il logo) */
+}
+
     /* 6. Disabilita l'Image Trail su Mobile */
     #image-trail-container {
        display: none !important;
