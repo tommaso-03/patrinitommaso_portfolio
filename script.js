@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    
+
+    // Definisci il breakpoint per mobile (coerente con i media query nel tuo CSS)
+    const MOBILE_BREAKPOINT = 768;
+
+
     // ===========================================
     // 1. LOGICA MENU MOBILE (Toggle Menu/X)
     // ===========================================
@@ -20,18 +24,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
         });
     }
-});
 
-
-
-
-
-
-
-// =======================================
-// 2. LOGICA CREDITS TOGGLE (Show/Hide)
-// =======================================
-document.addEventListener('DOMContentLoaded', () => {
+    // =======================================
+    // 2. LOGICA CREDITS TOGGLE (Show/Hide)
+    // =======================================
     const toggleButton = document.getElementById('credits-toggle');
     const content = document.getElementById('credits-content');
 
@@ -44,66 +40,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Qui andranno anche le altre logiche (es. menu mobile)
 
-});
-
-
-
-
-
-
-
-
-// =======================================
-// 3. LOGICA CURSORE PERSONALIZZATO
-// =======================================
-document.addEventListener('DOMContentLoaded', () => {
-    
+    // =======================================
+    // 3. LOGICA CURSORE PERSONALIZZATO (Disattivato su Mobile)
+    // =======================================
     const customCursor = document.querySelector('.custom-cursor');
 
-    if (customCursor) {
+    // CONTROLLO MOBILE: Se siamo su mobile, rimuovi il cursore e salta il resto della logica
+    if (window.innerWidth <= MOBILE_BREAKPOINT) {
+        if (customCursor) {
+            customCursor.remove();
+        }
+    } 
+    // Altrimenti, esegui la logica del cursore solo su desktop
+    else if (customCursor) {
         document.addEventListener('mousemove', (e) => {
             // Aggiorna la posizione del cursore personalizzato
             customCursor.style.left = `${e.clientX}px`;
             customCursor.style.top = `${e.clientY}px`;
         });
+
+        // Interazione con elementi cliccabili
+        const interactiveElements = document.querySelectorAll('a, .project-item');
+        
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                customCursor.classList.add('cursor-grow');
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                customCursor.classList.remove('cursor-grow');
+            });
+        });
     }
 
-    // NUOVA LOGICA: Interazione con elementi cliccabili
-    const interactiveElements = document.querySelectorAll('a, .project-item');
-    
-    interactiveElements.forEach(element => {
-        element.addEventListener('mouseenter', () => {
-            if (customCursor) {
-                customCursor.classList.add('cursor-grow');
-            }
-        });
-        
-        element.addEventListener('mouseleave', () => {
-            if (customCursor) {
-                customCursor.classList.remove('cursor-grow');
-            }
-        });
-    });
 
-
-    // ... (Logica Credits Toggle, Menu Mobile, o altre funzioni JS) ...
-
-});
-
-
-
-
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // ... (eventuali altri script come cursori o menu mobili) ...
-
+    // =======================================
+    // 4. LOGICA FOOTER SCROLL OVERLAP (Link Fisso)
+    // =======================================
     const backToProjectsLink = document.querySelector('.back-to-projects-link');
     const footer = document.querySelector('footer');
 
@@ -117,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('resize', checkFooterOverlap);
         
         function checkFooterOverlap() {
-            // Se non è visualizzato (mobile), resettiamo e usciamo
+            // Se il link è nascosto tramite CSS (es. su mobile con display: none), resettiamo
             if (window.getComputedStyle(backToProjectsLink).display === 'none') {
                 backToProjectsLink.style.transform = 'translateY(0)';
                 return;
@@ -126,26 +100,20 @@ document.addEventListener('DOMContentLoaded', function() {
             // 1. Posizione del bordo superiore del footer rispetto alla viewport (top)
             const footerTop = footer.getBoundingClientRect().top;
             
-            // 2. Calcola dove si trova il fondo del link quando è fisso (es: 15px da sotto)
-            // window.innerHeight è l'altezza della viewport.
-            // linkFixedLineY è la coordinata Y del fondo del link nella viewport.
+            // 2. Calcola dove si trova il fondo del link quando è fisso 
             const linkFixedLineY = window.innerHeight - MARGIN_BOTTOM_FIXED;
             
-            // 3. Calcola dove DEVE fermarsi il fondo del link per mantenere 20px dal footer.
-            // (Posizione del footer top) - (Margine di 20px)
+            // 3. Calcola dove DEVE fermarsi il fondo del link per mantenere il margine dal footer.
             const targetLineY = footerTop - MARGIN_TOP_FOOTER;
             
-            // 4. Calcola l'invasione/overlap: di quanto la posizione fissa del link (linkFixedLineY) 
-            // è scesa sotto la linea target (targetLineY).
+            // 4. Calcola l'invasione/overlap: quanto la posizione fissa è più in basso della linea target.
             const overlapDistance = linkFixedLineY - targetLineY;
             
-            // Se overlapDistance > 0, significa che la posizione fissa è più in basso della linea target
+            // Se overlapDistance > 0, c'è invasione e lo spostiamo in alto
             if (overlapDistance > 0) {
-                // Lo spostamento in alto è esattamente la distanza di invasione
-                // Usiamo Math.max per evitare valori negativi che farebbero scendere il link
                 backToProjectsLink.style.transform = `translateY(-${Math.max(0, overlapDistance)}px)`;
             } else {
-                // Non c'è invasione, rimane nella sua posizione fissa (translateY(0))
+                // Non c'è invasione, rimane nella sua posizione fissa
                 backToProjectsLink.style.transform = 'translateY(0)';
             }
         }
@@ -153,37 +121,28 @@ document.addEventListener('DOMContentLoaded', function() {
         // Esegui il check iniziale al caricamento della pagina
         checkFooterOverlap();
     }
+
+
+    // =======================================
+    // 5. INCLUSIONE AUTOMATICA FAVICON
+    // =======================================
+    function loadFavicon() {
+        // 1. Crea il nuovo elemento <link>
+        var link = document.createElement('link');
+        
+        // 2. Imposta gli attributi
+        link.rel = 'icon';
+        link.type = 'image/jpg'; 
+        link.href = 'assets/images/favicon/favicon.jpg'; 
+        
+        // 3. Trova l'elemento <head> del documento
+        var head = document.getElementsByTagName('head')[0];
+        
+        // 4. Aggiungi il tag <link> all'intestazione
+        if (head) {
+            head.appendChild(link);
+        }
+    }
+
+    loadFavicon();
 });
-
-
-
-
-
-
-
-/* ======================================= */
-/* --- INCLUSIONE AUTOMATICA FAVICON --- */
-/* ======================================= */
-
-// Questa funzione viene eseguita non appena la pagina è caricata.
-function loadFavicon() {
-    // 1. Crea il nuovo elemento <link>
-    var link = document.createElement('link');
-    
-    // 2. Imposta gli attributi
-    link.rel = 'icon';
-    link.type = 'image/jpg'; // O 'image/x-icon' se usi .ico
-    link.href = 'assets/images/favicon/favicon.jpg'; // Cambia in /favicon.ico o /favicon.svg se necessario
-    
-    // 3. Trova l'elemento <head> del documento
-    var head = document.getElementsByTagName('head')[0];
-    
-    // 4. Aggiungi il tag <link> all'intestazione
-    head.appendChild(link);
-}
-
-// Chiama la funzione quando il documento è pronto
-document.addEventListener('DOMContentLoaded', loadFavicon);
-
-// Se stai usando una struttura per eseguire il codice all'avvio, puoi anche usare:
-// window.onload = loadFavicon;
