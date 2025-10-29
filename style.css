@@ -529,7 +529,6 @@ footer {
 
 
 
-
 /* ======================================= */
 /* --- STILI PAGINE PROGETTI (Design/Photo/Film) --- */
 /* ======================================= */
@@ -538,8 +537,6 @@ footer {
 
 /* Wrapper che gestisce la griglia 3xN (Desktop) */
 .project-grid-wrapper {
-    /* RIMOZIONE: rimosso column-count e column-gap (Masonry) */
-    
     /* ABILITA LA GRIGLIA 3 COLONNE DENTRO IL CONTAINER 24-COLONNE */
     display: grid;
     /* La griglia si divide in tre colonne uguali */
@@ -556,21 +553,23 @@ footer {
     display: block;
     text-decoration: none;
     color: inherit;
-    /* Non è più necessario break-inside: avoid */
-    margin-bottom: 40px; /* Spazio verticale tra le righe */
+    margin-bottom: 60px; /* Spazio verticale tra le righe */
 }
 
 /* Area del titolo */
 .project-title-area {
     display: block;
-    margin-bottom: 5px;
     padding: 0;
+    
+    /* MODIFICATO: Aggiunge 15px di spazio tra la cover e il titolo sottostante */
+    margin-top: 10px; 
+    /* RIMOSSO: margin-bottom: 5px; (Non è più necessario se il testo è l'ultimo elemento visibile prima del margine di 40px) */
 }
 
 .project-title {
     /* AGGIORNATO: Tipografia standardizzata */
-    font-size: 16px; /* AGGIORNATO */
-    line-height: 18px; /* AGGIORNATO */
+    font-size: 16px; 
+    line-height: 18px; 
     letter-spacing: -0.02em;
     font-weight: bold;
     display: block;
@@ -580,16 +579,18 @@ footer {
 }
 
 
-/* Immagine di copertina (Ora gestita per il 16:9) */
+/* Immagine di copertina (Ora con proporzioni naturali) */
 .project-cover {
     display: block;
     width: 100%;
     
-    /* CRUCIALE: Contenitore forzato al rapporto 16:9 (altezza = 56.25% della larghezza) */
-    aspect-ratio: 16 / 9;
+    /* RIMOSSO: Forzatura al rapporto 16:9 */
+    /* Rimosso: aspect-ratio: 16 / 9; */
     
-    /* Assicura che l'immagine copra lo spazio 16:9 */
-    object-fit: cover;
+    /* MODIFICATO: Permette all'altezza di adattarsi alle proporzioni originali dell'immagine */
+    height: auto; 
+    
+    /* RIMOSSO: object-fit: cover; (Non serve più se non forzi le proporzioni) */
     
     /* RIMOSSO: mix-blend-mode: difference; */
 }
@@ -615,18 +616,22 @@ footer {
 
     /* Singolo progetto - Spazio verticale fisso */
     .project-item {
-        margin-bottom: 40px;
+        margin-bottom: 60px;
     }
     
     /* Immagine di copertina (Mobile Full Width) */
     .project-cover {
         /* Calcola la larghezza per uscire dai margini di 15px del .container */
         width: 100%;
-        height: auto;
+        height: auto; /* Mantenuto: proporzioni naturali */
         object-fit: cover;
     }
-}
 
+    /* Area del titolo su mobile */
+    .project-title-area {
+        margin-top: 10px; /* Mantiene il margine di 15px anche su mobile */
+    }
+}
 
 
 
