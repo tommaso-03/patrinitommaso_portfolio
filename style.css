@@ -533,8 +533,6 @@ footer {
 /* --- STILI PAGINE PROGETTI (Design/Photo/Film) --- */
 /* ======================================= */
 
-/* ... (main e page-title rimangono invariati) ... */
-
 /* Wrapper che gestisce la griglia 3xN (Desktop) */
 .project-grid-wrapper {
     /* ABILITA LA GRIGLIA 3 COLONNE DENTRO IL CONTAINER 24-COLONNE */
@@ -561,9 +559,8 @@ footer {
     display: block;
     padding: 0;
     
-    /* MODIFICATO: Aggiunge 15px di spazio tra la cover e il titolo sottostante */
+    /* MODIFICATO: Aggiunge 10px di spazio tra la cover e il titolo sottostante */
     margin-top: 10px; 
-    /* RIMOSSO: margin-bottom: 5px; (Non è più necessario se il testo è l'ultimo elemento visibile prima del margine di 40px) */
 }
 
 .project-title {
@@ -578,21 +575,39 @@ footer {
     color: white !important; /* MANTENUTO PER L'INVERSIONE */
 }
 
+/* --- LOGICA HOVER / TITOLO DESKTOP --- */
+
+/* 1. Il nome del progetto è visibile di default */
+.project-item .project-name {
+    display: inline;
+}
+
+/* 2. La tipologia di progetto e il separatore mobile sono nascosti di default su desktop */
+.project-item .project-type,
+.project-item .mobile-separator {
+    display: none;
+}
+
+/* 3. In hover sul blocco intero (.project-item), nascondiamo il nome del progetto */
+.project-item:hover .project-name {
+    display: none;
+}
+
+/* 4. In hover, mostriamo la tipologia di progetto E il separatore ( / Tipologia ) */
+.project-item:hover .project-type,
+.project-item:hover .mobile-separator {
+    display: inline;
+}
+/* --- FINE LOGICA HOVER --- */
+
 
 /* Immagine di copertina (Ora con proporzioni naturali) */
 .project-cover {
     display: block;
     width: 100%;
     
-    /* RIMOSSO: Forzatura al rapporto 16:9 */
-    /* Rimosso: aspect-ratio: 16 / 9; */
-    
-    /* MODIFICATO: Permette all'altezza di adattarsi alle proporzioni originali dell'immagine */
+    /* MODIFICATO: Proporzioni naturali */
     height: auto; 
-    
-    /* RIMOSSO: object-fit: cover; (Non serve più se non forzi le proporzioni) */
-    
-    /* RIMOSSO: mix-blend-mode: difference; */
 }
 
 
@@ -629,8 +644,25 @@ footer {
 
     /* Area del titolo su mobile */
     .project-title-area {
-        margin-top: 10px; /* Mantiene il margine di 15px anche su mobile */
+        margin-top: 10px; /* Mantiene il margine di 10px anche su mobile */
     }
+
+    /* --- LOGICA TITOLO MOBILE --- */
+    /* SU MOBILE DEVONO ESSERE SEMPRE VISIBILI (Nome / Tipologia) */
+    .project-item .project-name,
+    .project-item .project-type,
+    .project-item .mobile-separator {
+        display: inline !important; /* Forziamo la visualizzazione su mobile */
+    }
+    
+    /* Assicuriamo che l'hover non causi problemi su mobile touch */
+    .project-item:hover .project-name {
+        display: inline !important;
+    }
+    .project-item:hover .project-type {
+        display: inline !important;
+    }
+    /* --- FINE LOGICA TITOLO MOBILE --- */
 }
 
 
