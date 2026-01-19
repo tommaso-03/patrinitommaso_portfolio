@@ -572,6 +572,7 @@ footer {
     grid-template-columns: repeat(4, 1fr);
     /* Utilizziamo il gap di 10px definito dal .container */
     gap: 10px;
+    row-gap: 60px; /* Spazio verticale tra le righe */
     
     /* Il wrapper deve estendersi per tutta la larghezza della griglia 24-colonne */
     grid-column: 1 / -1;
@@ -582,7 +583,8 @@ footer {
     display: block;
     text-decoration: none;
     color: inherit;
-    margin-bottom: 60px; /* Spazio verticale tra le righe */
+    /* Rimosso margin-bottom per rendere cliccabile solo l'area effettiva */
+    align-self: start; /* Impedisce al link di estendersi verticalmente nella grid cell */
 }
 
 /* Area del titolo */
@@ -632,6 +634,22 @@ footer {
 /* --- FINE LOGICA HOVER --- */
 
 
+/* Effetto hover Eggleston cover */
+.eggleston-hover-item {
+    position: relative;
+}
+
+.eggleston-cover-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.eggleston-hover-item:hover .eggleston-cover-2 {
+    opacity: 1;
+}
+
 /* Immagine di copertina (Ora con proporzioni naturali) */
 .project-cover {
     display: block;
@@ -662,6 +680,7 @@ footer {
     .project-grid-wrapper {
         grid-template-columns: 1fr; /* Una sola colonna */
         gap: 0;
+        row-gap: 60px; /* Spazio verticale tra i progetti */
     }
 
     
@@ -671,9 +690,9 @@ footer {
         margin-bottom: 40px;
     }
 
-    /* Singolo progetto - Spazio verticale fisso */
+    /* Singolo progetto - Rimosso margin-bottom */
     .project-item {
-        margin-bottom: 60px;
+        margin-bottom: 0;
     }
     
     /* Immagine di copertina (Mobile Full Width) */
