@@ -905,9 +905,10 @@ footer {
     -o-user-drag: none;
 }
 
-/* Margine nero per le immagini del progetto Pixar */
-body:has([src*="pixar"]) .gallery-image[src*="pixar"] {
-    border: 7px solid black;
+/* Margine nero per le immagini del progetto Pixar e Eggleston */
+body:has([src*="pixar"]) .gallery-image[src*="pixar"],
+body:has([src*="eggleston"]) .gallery-image[src*="eggleston"] {
+    border: 2px solid black;
     box-sizing: border-box;
     border-radius: 8px;
 }
