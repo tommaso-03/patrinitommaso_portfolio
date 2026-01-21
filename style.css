@@ -331,6 +331,13 @@ footer {
     
 }
 
+/* Bordo nero per le cover di Pixar e Eggleston nella home */
+.trail-image[src*="pixar"],
+.trail-image[src*="eggleston"] {
+    border: 2px solid black;
+    box-sizing: border-box;
+}
+
 /* Effetto hover sulle immagini del trail */
 .trail-image:hover {
     transform: scale(1.08) translateY(-8px);
