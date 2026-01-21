@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         'cover-rewind.webp': 'rewind.html',
         'cover-sexting.webp': 'sextingcoercion.html',
         'cover-urban.webp': 'urbanvisions.html',
-        'cover-views.webp': 'views.html'
+        'cover-views.webp': 'views.html',
+        'cover-eggleston.png': 'eggleston.html'
     };
     
     const images = [
@@ -49,6 +50,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     '/assets/images/cover/cover-sexting.webp',
     '/assets/images/cover/cover-urban.webp',
     '/assets/images/cover/cover-views.webp',
+    '/assets/images/cover/cover-eggleston.png',
 ];
 
     const trailContainer = document.getElementById('image-trail-container');
