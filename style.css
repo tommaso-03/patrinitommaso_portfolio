@@ -637,6 +637,9 @@ footer {
 /* Effetto hover Eggleston cover */
 .eggleston-hover-item {
     position: relative;
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .eggleston-cover-2 {
@@ -644,6 +647,7 @@ footer {
     top: 0;
     left: 0;
     opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .eggleston-hover-item:hover .eggleston-cover-2 {
