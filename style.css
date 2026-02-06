@@ -128,11 +128,11 @@ html {
 }
 
 /* Effetto hover sul desktop */
-#desktop-nav:hover a {
+#desktop-nav:has(a:hover) a {
     opacity: 0;
 }
 #desktop-nav a:hover {
-    opacity: 1;
+    opacity: 1 !important;
 }
 
 /* Disposizione Menu Desktop: equidistante e su tutta la larghezza */
