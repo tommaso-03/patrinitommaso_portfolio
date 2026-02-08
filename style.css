@@ -406,8 +406,8 @@ footer {
     /* POSIZIONAMENTO FISSO (Desktop) */
     position: fixed;
     
-    /* Larghezza: 4 colonne. Calcolo rispetto al .container e ai suoi gap. */
-    width: calc(4 * (100% / 24) + 3 * 15px); /* 4 colonne + 3 gap */
+    /* Larghezza: 3 colonne. Calcolo rispetto al .container e ai suoi gap. */
+    width: calc(3 * (100% / 24) + 2 * 15px); /* 3 colonne + 2 gap */
     
     /* Allineamento a destra (15px dal bordo destro della viewport) */
     right: 15px;
@@ -791,10 +791,26 @@ footer {
     font-weight: bold;
     margin-bottom: 40px;
     padding-right: 15px;
-    text-indent: 60px;
     
     /* RIMOSSO: mix-blend-mode: difference; e color: white !important; (Testo fisso) */
     color: black !important; /* RIPRISTINO DEL NERO */
+}
+
+/* Entrambi i paragrafi occupano metà pagina */
+.project-description p {
+    max-width: 100%;
+}
+
+/* Primo paragrafo: senza margine sotto e rientro 10% prima riga */
+.project-description p:first-child {
+    margin-bottom: 0;
+    text-indent: 10%;
+}
+
+/* Secondo paragrafo: parte più a destra senza margine sopra */
+.project-description p:nth-child(2) {
+    margin-left: 10%;
+    margin-top: 0;
 }
 
 .project-title-main {
@@ -1023,6 +1039,12 @@ body:has([src*="eggleston"]) .project-cover[src*="eggleston"] {
     .credits-toggle-container {
         /* Rimuove i margini/padding aggiuntivi che avevamo nel desktop per il 50% */
         padding-right: 0;
+    }
+    
+    /* Reset layout paragrafi su mobile */
+    .project-description p {
+        max-width: 100%;
+        margin-left: 0;
     }
     
     .project-gallery-panel {
