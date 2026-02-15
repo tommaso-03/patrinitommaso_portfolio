@@ -641,6 +641,26 @@ footer {
 /* --- FINE LOGICA HOVER --- */
 
 
+/* Effetto hover Eggleston cover (per pagina progetto) */
+.eggleston-hover-item {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.eggleston-cover-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.eggleston-hover-item:hover .eggleston-cover-2 {
+    opacity: 1;
+}
+
 /* Hover Slideshow Effect */
 .hover-slideshow {
     position: relative;
