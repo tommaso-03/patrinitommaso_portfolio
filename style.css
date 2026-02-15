@@ -641,24 +641,21 @@ footer {
 /* --- FINE LOGICA HOVER --- */
 
 
-/* Effetto hover Eggleston cover */
-.eggleston-hover-item {
+/* Hover Slideshow Effect */
+.hover-slideshow {
+    position: relative;
+}
+
+.project-images-wrapper {
     position: relative;
     display: block;
     width: 100%;
-    margin-bottom: 15px;
 }
 
-.eggleston-cover-2 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.eggleston-hover-item:hover .eggleston-cover-2 {
-    opacity: 1;
+.hover-slideshow .project-cover {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
 /* Immagine di copertina (Ora con proporzioni naturali) */
