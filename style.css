@@ -1,6 +1,13 @@
 /* Importazione Font e reset */
+@import url('https://fonts.googleapis.com/css2?family=PP+Mori:wght@400;500;600;700&display=swap');
+
+* {
+    font-weight: 600;
+}
+
 body {
     font-family: 'PP Mori', 'Helvetica Now Text', Arial, sans-serif;
+    font-weight: 600;
     margin: 0;
     padding: 0;
     color: black;
@@ -78,7 +85,7 @@ html {
     font-size: 16px; /* AGGIORNATO */
     line-height: 18px; /* AGGIORNATO */
     letter-spacing: -0.02em;
-    font-weight: bold;
+    font-weight: 600;
     text-decoration: none;
     color: rgb(0, 0, 0); /* COLORE BASE */
     mix-blend-mode: difference; /* MANTENUTO SUL TESTO */
@@ -117,7 +124,7 @@ html {
     font-size: 16px; /* AGGIORNATO */
     line-height: 18px; /* AGGIORNATO */
     letter-spacing: -0.02em;
-    font-weight: bold;
+    font-weight: 600;
     text-decoration: none;
     color: rgb(0, 0, 0); /* COLORE BASE */
     /* Regole per l'effetto hover */
@@ -383,7 +390,7 @@ footer {
     font-size: 16px;
     line-height: 18px;
     letter-spacing: -0.02em;
-    font-weight: bold;
+    font-weight: 600;
     color: rgb(0, 0, 0); /* COLORE BASE */
     
     padding-top: 40px;
@@ -428,7 +435,8 @@ footer {
     gap: 0.4em;
     text-decoration: none;
 }
-.back-to-projects-link .back-arrow {
+.back-to-projects-link .back-arrow,
+.mobile-back-to-projects-link .back-arrow {
     font-size: 0.7em; /* più piccola del testo */
     line-height: 1;
     display: inline-block;
@@ -456,7 +464,7 @@ footer {
     font-size: 16px;
     line-height: 18px;
     letter-spacing: -0.02em;
-    font-weight: bold;
+    font-weight: 600;
     color: rgb(0, 0, 0); /* COLORE BASE */
     
     mix-blend-mode: difference; /* MANTENUTO SUL TESTO */
@@ -479,7 +487,7 @@ footer {
     font-size: 16px;
     line-height: 18px;
     letter-spacing: -0.02em;
-    font-weight: bold;
+    font-weight: 600;
     color: rgb(0, 0, 0); /* COLORE BASE */
     
     mix-blend-mode: difference; /* MANTENUTO SUL TESTO */
@@ -608,7 +616,7 @@ footer {
     font-size: 16px; 
     line-height: 18px; 
     letter-spacing: -0.02em;
-    font-weight: bold;
+    font-weight: 600;
     display: block;
     
     mix-blend-mode: difference; /* MANTENUTO SUL TESTO */
@@ -805,7 +813,7 @@ footer {
     font-size: 16px; /* AGGIORNATO */
     line-height: 18px; /* AGGIORNATO */
     letter-spacing: -0.02em;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 40px;
     padding-right: 15px;
     
@@ -835,7 +843,7 @@ footer {
     font-size: 16px; /* AGGIORNATO */
     line-height: 18px; /* AGGIORNATO */
     letter-spacing: -0.02em;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 60px;
     text-decoration: underline;
     
@@ -855,7 +863,7 @@ footer {
     font-size: 16px; /* AGGIORNATO */
     line-height: 18px; /* AGGIORNATO */
     letter-spacing: -0.02em;
-    font-weight: bold;
+    font-weight: 600;
     color: black; /* COLORE BASE */
     margin: 0;
     cursor: pointer;
@@ -888,7 +896,7 @@ footer {
     font-size: 16px; /* AGGIORNATO */
     line-height: 18px; /* AGGIORNATO */
     letter-spacing: -0.02em;
-    font-weight: bold;
+    font-weight: 600;
     color: black; /* COLORE BASE */
     padding-top: 0px; /* Spazio sotto il titolo cliccabile */
     padding-left: 25px;
@@ -1014,7 +1022,7 @@ body:has([src*="eggleston"]) .project-cover[src*="eggleston"] {
     font-size: 16px;
     line-height: 18px;
     letter-spacing: -0.02em;
-    font-weight: bold;
+    font-weight: 600;
     color: black; /* COLORE BASE */
     text-decoration: none;
     
@@ -1044,7 +1052,7 @@ body:has([src*="eggleston"]) .project-cover[src*="eggleston"] {
         padding: 0; /* 0 sopra/sotto, 15px a destra/sinistra */
         overflow-y: visible;
         grid-column: 1 / -1;
-        margin-top: 100px;
+        margin-top: 40px;
     }
     
     .project-title-main{
@@ -1056,6 +1064,18 @@ body:has([src*="eggleston"]) .project-cover[src*="eggleston"] {
     .credits-toggle-container {
         /* Rimuove i margini/padding aggiuntivi che avevamo nel desktop per il 50% */
         padding-right: 0;
+    }
+
+    .back-to-projects-link {
+        position: static;
+        display: block;
+        margin-bottom: 40px;
+        font-size: 16px;
+        line-height: 18px;
+        letter-spacing: -0.02em;
+        font-weight: 600;
+        color: black !important;
+        text-decoration: none;
     }
     
     /* Reset layout paragrafi su mobile */
@@ -1104,10 +1124,6 @@ body:has([src*="eggleston"]) .project-cover[src*="eggleston"] {
         margin-bottom: 0;
     }
 
-    /* Nuovo: Nasconde il link fisso "Back to projects" su mobile */
-    .back-to-projects-link {
-        display: none;
-    }
 }
 
 /* ======================================= */
@@ -1130,7 +1146,7 @@ body:has([src*="eggleston"]) .project-cover[src*="eggleston"] {
     font-size: 16px; /* AGGIORNATO */
     line-height: 18px; /* AGGIORNATO */
     letter-spacing: -0.02em;
-    font-weight: bold;
+    font-weight: 600;
     color: black; /* COLORE BASE */
     /* Rende il link Prev e Next cliccabili su una superficie più ampia */
     padding: 0px;
