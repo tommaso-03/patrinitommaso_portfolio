@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const projectLinks = {
         'cover-ageusia.webp': 'ageusia.html',
         'cover-beazley.webp': 'beazley.html',
-        'cover-brutalism.webp': 'brutalism.html',
         'cover-cometa.webp': 'cometa.html',
         'cover-exnova.webp': 'exnova.html',
         'cover-intercept.webp': 'intercept.html',
@@ -18,7 +17,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         'cover-letmein.webp': 'letmein.html',
         'cover-mtp.webp': 'mtp600.html',
         'cover-streetframes.webp': 'streetframes.html',
-        'cover-next.webp': 'next.html',
         'cover-oppureno.webp': 'oppureno.html',
         'cover-pagani.webp': 'pagani.html',
         'cover-designweek.webp': 'designweek.html',
@@ -33,7 +31,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const images = [
     '/assets/images/cover/cover-ageusia.webp',
     '/assets/images/cover/cover-beazley.webp',
-    '/assets/images/cover/cover-brutalism.webp',
     '/assets/images/cover/cover-cometa.webp',
     '/assets/images/cover/cover-exnova.webp',
     '/assets/images/cover/cover-intercept.webp',
@@ -41,7 +38,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     '/assets/images/cover/cover-letmein.webp',
     '/assets/images/cover/cover-mtp.webp',
     '/assets/images/cover/cover-streetframes.webp',
-    '/assets/images/cover/cover-next.webp',
     '/assets/images/cover/cover-oppureno.webp',
     '/assets/images/cover/cover-pagani.webp',
     '/assets/images/cover/cover-designweek.webp',
