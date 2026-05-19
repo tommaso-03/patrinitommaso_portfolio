@@ -504,6 +504,15 @@ footer {
     margin-bottom: 0;
 }
 
+/* Primo elemento della riga (rimane allineato), il resto del paragrafo viene indentato */
+.cv-content-col p .first {
+    display: block;
+}
+.cv-content-col p .rest {
+    display: block;
+    margin-left: 40px; /* spostamento a destra per le righe successive */
+}
+
 /* Formattazione specifica per la lista Interests */
 .cv-content-col.interests-list p {
     margin-bottom: 0;
@@ -556,6 +565,11 @@ footer {
     
     .cv-content-col p {
         margin: 0 0 15px 0;
+    }
+
+    /* riduci l'indent su mobile per evitare overflow */
+    .cv-content-col p .rest {
+        margin-left: 18px;
     }
 }
 
