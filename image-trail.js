@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         'cover-rewind.webp': 'rewind.html',
         'cover-sexting.webp': 'sextingcoercion.html',
         'cover-urban.webp': 'urbanvisions.html',
+        'cover-luigis.png': 'luigis.html',
         'cover-views.webp': 'views.html',
         'cover-eggleston1.png': 'eggleston.html'
     };
@@ -40,6 +41,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     '/assets/images/cover/cover-streetframes.webp',
     '/assets/images/cover/cover-oppureno.webp',
     '/assets/images/cover/cover-pagani.webp',
+    '/assets/images/cover/cover-luigis.png',
     '/assets/images/cover/cover-designweek.webp',
     '/assets/images/cover/cover-pixar.webp',
     '/assets/images/cover/cover-rewind.webp',

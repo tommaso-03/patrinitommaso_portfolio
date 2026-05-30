@@ -1008,6 +1008,14 @@ body:has([src*="eggleston"]) .project-cover[src*="eggleston"] {
     width: 50%; /* Se c'è la classe .media-pair, dividi lo spazio equamente in due */
 }
 
+.project-media-row.media-triple .media-item {
+    width: 33.333%;
+}
+
+.project-media-row.luigis-inline .media-item {
+    min-width: 0;
+}
+
 /* Stile per i tag video all'interno del contenitore media */
 .gallery-video {
     width: 100%; /* Occupano sempre il 100% del loro contenitore (.media-item) */
@@ -1124,7 +1132,8 @@ body:has([src*="eggleston"]) .project-cover[src*="eggleston"] {
     
     /* CORREZIONE: Imposta sia l'item generico che la coppia affiancata al 100% */
     .project-media-row .media-item,
-    .project-media-row.media-pair .media-item { /* TARGET AGGIUNTO */
+    .project-media-row.media-pair .media-item,
+    .project-media-row.media-triple .media-item { /* TARGET AGGIUNTO */
         width: 100%; /* Ogni item a tutta larghezza */
     }
     
